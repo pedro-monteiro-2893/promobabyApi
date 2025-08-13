@@ -7,6 +7,9 @@ import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.HttpException;
 import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import com.google.gson.GsonBuilder;
+import com.promobaby.promoBabyApi.Exception.PromoBabyApiException;
+import com.promobaby.promoBabyApi.Exception.PromoBabyApiExceptionMessages;
+
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 public class ResponseHandler<T> implements HttpClientResponseHandler<T> {
@@ -19,16 +22,24 @@ public class ResponseHandler<T> implements HttpClientResponseHandler<T> {
 
 	@Override
 	public T handleResponse(ClassicHttpResponse response) throws HttpException, IOException {
-
-		if (response.getEntity() != null) {
-
-			var gson = new GsonBuilder().create();
-
-			return gson.fromJson(EntityUtils.toString(response.getEntity()), responseType);
-
-		} else {
-			return null;
+		
+		int statusCode = response.getCode();
+		
+		if(statusCode == 200 || statusCode == 204) {
+			
+			if (response.getEntity() != null) {
+				
+				var gson = new GsonBuilder().create();
+				
+				return gson.fromJson(EntityUtils.toString(response.getEntity()), responseType);
+				
+			} else {
+				return null;
+			}
+		}else {
+			throw new PromoBabyApiException(statusCode,PromoBabyApiExceptionMessages.ERRO_COMUNICACAO_AWIN, response.toString());
 		}
+
 	}
 
 }
