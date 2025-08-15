@@ -2,6 +2,9 @@ package com.promobaby.promoBabyApi.Model;
 
 import java.util.List;
 
+import com.promobaby.promoBabyApi.Model.Auxiliares.PrimaryRegion;
+import com.promobaby.promoBabyApi.Model.Auxiliares.ValidDomain;
+
 import lombok.Getter;
 import lombok.Setter;
 

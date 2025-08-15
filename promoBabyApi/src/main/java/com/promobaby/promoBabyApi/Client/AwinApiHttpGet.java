@@ -26,6 +26,22 @@ public class AwinApiHttpGet {
 	}
 	
 	
+	public static HttpGet getProgramasDetalhes(PromoBabyApiAwinProperties config, Long advertiserId) {
+
+		UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(config.getBaseUrl())
+                .path(config.getAfiliadoId())
+                .path(config.getProgramasDetalhes())
+                .queryParam("advertiserId",advertiserId.toString())
+                .queryParam("accessToken", config.getApiKey())
+                .queryParam("countryCode", config.getCountryCode())
+                .queryParam("relationship", config.getRelationship());
+
+        return configureHttpGet(builder, config);
+
+	}
+	
+	
 	public static HttpGet configureHttpGet(UriComponentsBuilder builder, PromoBabyApiAwinProperties config) {
 		
 		HttpGet httpGet = new HttpGet(builder.toUriString());

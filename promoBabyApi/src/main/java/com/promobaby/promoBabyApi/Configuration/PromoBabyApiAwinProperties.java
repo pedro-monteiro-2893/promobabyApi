@@ -29,6 +29,8 @@ public abstract class PromoBabyApiAwinProperties {
 	
 	private String baseUrl;
 	
+	private String baseUrl2;
+	
 	private String afiliadoId;
 	
 	private String countryCode;
@@ -36,6 +38,16 @@ public abstract class PromoBabyApiAwinProperties {
 	private String apiKey;
 	
 	private String relationship;
+	
+	private Boolean exclusiveOnly;
+	
+	private String status;
+	
+	private String type;
+	
+	private Integer page;
+
+	private Integer pageSize;
 	
 	private String programasFiliados;
 	
